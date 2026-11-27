@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.HomeFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_home" />
+
+    <!-- Dummy fragment lain (kosongan dulu aja) -->
+    <fragment
+        android:id="@+id/posFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.PosFragment"
+        android:label="POS / Transaksi"
+        tools:layout="@layout/fragment_pos" >
+        <action
+            android:id="@+id/actionPosFragmentToNotaDetailFragment"
+            app:destination="@id/notaDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.InventoryFragment"
+        android:label="Inventory"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.SettingsFragment"
+        android:label="Pengaturan"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_deviceManagerFragment"
+            app:destination="@id/deviceManagerFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_printerPrefFragment"
+            app:destination="@id/printerPrefFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_backupRestoreFragment"
+            app:destination="@id/backupRestoreFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notaDetailFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.NotaDetailFragment"
+        android:label="Detail Nota"
+        tools:layout="@layout/fragment_nota_detail">
+        <argument
+            android:name="id"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/deviceManagerFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.DeviceManagerFragment"
+        android:label="Device Manager"
+        tools:layout="@layout/fragment_device_manager"/>
+    <fragment
+        android:id="@+id/printerPrefFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.PrinterPrefFragment"
+        android:label="Pengaturan Printer"
+        tools:layout="@layout/fragment_printer_pref" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.ajoclub.ajopos.view.ui.main.AboutFragment"
+        android:label="Tentang Aplikasi"
+        tools:layout="@layout/fragment_about"/>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.ajoclub.ajopos.ui.report.ReportFragment"
+        android:label="Laporan"
+        tools:layout="@layout/fragment_report"/>
+    <fragment
+        android:id="@+id/qrisSettingsFragment"
+        android:name="com.ajoclub.ajopos.view.ui.settings.QrisSettingsFragment"
+        android:label="Pengaturan QRIS"
+        tools:layout="@layout/fragment_qris_settings"/>
+    <fragment
+        android:id="@+id/backupRestoreFragment"
+        android:name="com.ajoclub.ajopos.view.BackupRestoreFragment"
+        android:label="BackupRestoreFragment"
+        tools:layout="@layout/fragment_backup_restore"/>
+
+</navigation>

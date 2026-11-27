@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/nav_kategori">
+
+    <!-- =======================
+         KATEGORI
+    ======================== -->
+    <fragment
+        android:id="@+id/nav_kategori"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.KategoriFragment"
+        android:label="Kategori"
+        tools:layout="@layout/fragment_kategori">
+        <action
+            android:id="@+id/actionToAddKategoriFragment"
+            app:destination="@id/addKategoriFragment" />
+        <action
+            android:id="@+id/actionToEditKategoriFragment"
+            app:destination="@id/editKategoriFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addKategoriFragment"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.AddKategoriFragment"
+        android:label="AddKategoriFragment"
+        tools:layout="@layout/fragment_add_edit_kategori" />
+
+    <fragment
+        android:id="@+id/editKategoriFragment"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.EditKategoriFragment"
+        android:label="EditKategoriFragment"
+        tools:layout="@layout/fragment_add_edit_kategori">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <!-- =======================
+         PRODUK
+    ======================== -->
+    <fragment
+        android:id="@+id/nav_produk"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.ProdukFragment"
+        android:label="Produk"
+        tools:layout="@layout/fragment_produk">
+        <action
+            android:id="@+id/actionToAddProdukFragment"
+            app:destination="@id/addProdukFragment" />
+        <action
+            android:id="@+id/actionToEditProdukFragment"
+            app:destination="@id/editProdukFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addProdukFragment"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.AddProdukFragment"
+        android:label="AddProdukFragment"
+        tools:layout="@layout/fragment_add_edit_produk" />
+
+    <fragment
+        android:id="@+id/editProdukFragment"
+        android:name="com.ajoclub.ajopos.view.ui.Admin.EditProdukFragment"
+        android:label="EditProdukFragment"
+        tools:layout="@layout/fragment_add_edit_produk">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

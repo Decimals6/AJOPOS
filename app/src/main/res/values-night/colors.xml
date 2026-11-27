@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Header Colors -->
+    <color name="header_bg">#070D1D</color>
+    <color name="header_on">#FFFFFF</color>
+
+    <!-- Brand Accents (Dark Mode - High Contrast Crisp White & Slate) -->
+    <color name="primary">#FFFFFF</color>
+    <color name="primary2">#182B50</color>
+    <color name="secondary">#E2E8F0</color>
+    <color name="light">#070D1D</color>
+    <color name="highlight">#182B50</color>
+
+    <!-- Backgrounds & Surfaces (Dark Mode) -->
+    <color name="background">#070D1D</color>
+    <color name="surface">#0E1A34</color>
+    <color name="surface_variant">#182B50</color>
+    <color name="surface_tint">#0E1A34</color>
+    <color name="outline">#1E293B</color>
+
+    <!-- Text Colors (Dark Mode) -->
+    <color name="on_primary">#070D1D</color>
+    <color name="on_surface">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+
+    <!-- States -->
+    <color name="success">#22C55E</color>
+    <color name="success_light">#14532D</color>
+    <color name="error">#EF4444</color>
+    <color name="error_light">#7F1D1D</color>
+    <color name="warning">#F59E0B</color>
+    <color name="warning_light">#78350F</color>
+
+    <!-- Basic -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

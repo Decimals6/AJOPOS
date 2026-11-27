@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.AJOPOS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+
+        <!-- Primary / Secondary -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary2</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_primary</item>
+
+        <!-- Control / Navigation Arrow Icon Color -->
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="drawerArrowStyle">@style/Widget.AJOPOS.DrawerArrow</item>
+
+        <!-- Surface / Background -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="backgroundColor">@color/background</item>
+        <item name="android:statusBarColor">@color/header_bg</item>
+
+        <!-- Button style -->
+        <item name="materialButtonStyle">@style/Widget.AJOPOS.Button</item>
+    </style>
+
+    <style name="Widget.AJOPOS.DrawerArrow" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">#FFFFFF</item>
+    </style>
+
+    <style name="Widget.AJOPOS.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:paddingRight">18dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

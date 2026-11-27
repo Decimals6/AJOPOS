@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AJOPOS</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_number">0851-8862-7365</string>
+    <string name="website">www.ajocorp.com</string>
+</resources>

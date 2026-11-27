@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:title="Dashboard"
+            android:icon="@drawable/baseline_home_24" />
+        <item
+            android:id="@+id/posFragment"
+            android:title="POS / Transaksi"
+            android:icon="@drawable/baseline_point_of_sale_24" />
+        <item
+            android:id="@+id/admin_menu"
+            android:title="Master Data"
+            android:icon="@drawable/baseline_inventory_24" />
+        <item
+            android:id="@+id/reportFragment"
+            android:title="Laporan"
+            android:icon="@drawable/baseline_analytics_24" />
+    </group>
+
+    <item android:title="Personalize">
+        <menu>
+            <item android:id="@+id/qrisSettingsFragment" android:title="Qris" android:icon="@drawable/ic_payment" />
+            <item android:id="@+id/settingsFragment" android:title="Settings" android:icon="@drawable/baseline_settings_24" />
+            <item android:id="@+id/aboutFragment" android:title="About" android:icon="@drawable/ic_info" />
+            <item android:id="@+id/logout_action" android:title="Logout" android:icon="@drawable/baseline_logout_24" />
+        </menu>
+    </item>
+</menu>
