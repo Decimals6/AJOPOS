@@ -1,5 +1,7 @@
 package com.ajoclub.ajopos.view.ui.Admin
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -29,6 +32,27 @@ class AddProdukFragment : Fragment() {
     private var selectedKategori: Kategori? = null
     private var kategoriList: List<Kategori> = listOf()
     private var savedImageFileName: String? = null
+
+    private var pendingCameraAction: (() -> Unit)? = null
+
+    private val requestCameraPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                pendingCameraAction?.invoke()
+            } else {
+                Toast.makeText(requireContext(), "Izin kamera diperlukan untuk memindai barcode.", Toast.LENGTH_SHORT).show()
+            }
+            pendingCameraAction = null
+        }
+
+    private fun checkCameraPermission(onGranted: () -> Unit) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            onGranted()
+        } else {
+            pendingCameraAction = onGranted
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
 
     // Register Photo Picker
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->

@@ -1,11 +1,15 @@
 package com.ajoclub.ajopos.view.ui.main
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,6 +35,27 @@ class HomeFragment : Fragment() {
     private val cartList = mutableListOf<CartItem>()
     private val currentUserId: Int = 0
     private var cartBottomSheetDialog: CartBottomSheetDialog? = null
+
+    private var pendingCameraAction: (() -> Unit)? = null
+
+    private val requestCameraPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                pendingCameraAction?.invoke()
+            } else {
+                Toast.makeText(requireContext(), "Izin kamera diperlukan untuk memindai barcode.", Toast.LENGTH_SHORT).show()
+            }
+            pendingCameraAction = null
+        }
+
+    private fun checkCameraPermission(onGranted: () -> Unit) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            onGranted()
+        } else {
+            pendingCameraAction = onGranted
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,10 +119,12 @@ class HomeFragment : Fragment() {
 
         // 6. Tombol Scan Barcode Kasir Berkelanjutan (Mode Indomaret)
         binding.btnContinuousScan.setOnClickListener {
-            val scannerDialog = ContinuousScanDialog { barcode ->
-                viewModel.findByBarcode(barcode)
+            checkCameraPermission {
+                val scannerDialog = ContinuousScanDialog { barcode ->
+                    viewModel.findByBarcode(barcode)
+                }
+                scannerDialog.show(childFragmentManager, "CONTINUOUS_SCANNER")
             }
-            scannerDialog.show(childFragmentManager, "CONTINUOUS_SCANNER")
         }
 
         // 7. Tombol Reset / Clear Keranjang

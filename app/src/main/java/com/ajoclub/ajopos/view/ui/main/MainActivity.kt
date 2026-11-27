@@ -24,6 +24,8 @@ import com.ajoclub.ajopos.view.ui.Admin.AdminActivity
 
 import com.ajoclub.ajopos.util.ThemePrefs
 
+import android.widget.Toast
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -31,41 +33,40 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var sessionManager: SessionManager
 
-    private val btPermissions = arrayOf(
-        Manifest.permission.BLUETOOTH_SCAN,
-        Manifest.permission.BLUETOOTH_CONNECT
-    )
+    private val appPermissions: Array<String>
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            arrayOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.BLUETOOTH_SCAN,
+                Manifest.permission.BLUETOOTH_CONNECT
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.CAMERA
+            )
+        }
 
     // ============================================================
-    // RUNTIME PERMISSION HANDLER (Android 12+)
+    // RUNTIME PERMISSION HANDLER (Camera & Bluetooth)
     // ============================================================
 
-    private val requestBtPermissions =
+    private val requestAppPermissions =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { perms ->
-
-            val scanGranted = perms[Manifest.permission.BLUETOOTH_SCAN] == true
-            val connectGranted = perms[Manifest.permission.BLUETOOTH_CONNECT] == true
-
-            if (!scanGranted || !connectGranted) {
-                AlertDialog.Builder(this)
-                    .setTitle("Izin Diperlukan")
-                    .setMessage("Aplikasi membutuhkan izin Bluetooth agar bisa terhubung ke printer.")
-                    .setPositiveButton("OK", null)
-                    .show()
+            val cameraGranted = perms[Manifest.permission.CAMERA] == true
+            if (!cameraGranted) {
+                Toast.makeText(this, "Izin kamera diperlukan untuk fitur barcode scanner.", Toast.LENGTH_SHORT).show()
             }
         }
 
-    private fun ensureBluetoothPermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
-
-        val needRequest = btPermissions.any {
+    private fun ensureAppPermissions() {
+        val permissionsToRequest = appPermissions.filter {
             ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
+        }.toTypedArray()
 
-        if (needRequest) {
-            requestBtPermissions.launch(btPermissions)
+        if (permissionsToRequest.isNotEmpty()) {
+            requestAppPermissions.launch(permissionsToRequest)
         }
     }
 
@@ -102,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         // Cek & request permission di awal
-        ensureBluetoothPermissions()
+        ensureAppPermissions()
 
         // setup toolbar
         setSupportActionBar(binding.toolbar)

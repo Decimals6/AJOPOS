@@ -1,10 +1,14 @@
 package com.ajoclub.ajopos.view.ui.settings
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ajoclub.ajopos.databinding.FragmentQrisSettingsBinding
 import com.ajoclub.ajopos.util.PortraitCaptureActivity
@@ -16,6 +20,27 @@ class QrisSettingsFragment : Fragment() {
 
     private var _binding: FragmentQrisSettingsBinding? = null
     private val binding get() = _binding!!
+
+    private var pendingCameraAction: (() -> Unit)? = null
+
+    private val requestCameraPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                pendingCameraAction?.invoke()
+            } else {
+                Toast.makeText(requireContext(), "Izin kamera diperlukan untuk memindai QRIS.", Toast.LENGTH_SHORT).show()
+            }
+            pendingCameraAction = null
+        }
+
+    private fun checkCameraPermission(onGranted: () -> Unit) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            onGranted()
+        } else {
+            pendingCameraAction = onGranted
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
 
     private val scanQrisLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents != null) {
@@ -39,13 +64,15 @@ class QrisSettingsFragment : Fragment() {
         loadExistingQris()
 
         binding.btnScanQris.setOnClickListener {
-            val options = ScanOptions().apply {
-                setPrompt("Arahkan kamera ke QRIS fisik toko Anda")
-                setBeepEnabled(true)
-                setOrientationLocked(true)
-                setCaptureActivity(PortraitCaptureActivity::class.java)
+            checkCameraPermission {
+                val options = ScanOptions().apply {
+                    setPrompt("Arahkan kamera ke QRIS fisik toko Anda")
+                    setBeepEnabled(true)
+                    setOrientationLocked(true)
+                    setCaptureActivity(PortraitCaptureActivity::class.java)
+                }
+                scanQrisLauncher.launch(options)
             }
-            scanQrisLauncher.launch(options)
         }
 
         binding.btnSaveQris.setOnClickListener {
