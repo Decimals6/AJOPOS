@@ -32,7 +32,7 @@
   - `adapter/`: RecyclerView Adapters (`CartAdapter`, `PosProdukAdapter`, `ProdukAdapter`, `KategoriAdapter`, `NotaListAdapter`, dll.)
 - `bt/`: Modul pencetakan Bluetooth (`BluetoothPrinterManager`, `ReceiptFormater`)
 - `worker/`: `PrintJobWorker`
-- `util/`: Helper utilities (`DatabaseBackupHelper`, `QrisHelper`, `PrinterPrefs`, `ImageStorageHelper`, `PortraitCaptureActivity`, `Util`)
+- `util/`: Helper utilities (`DatabaseBackupHelper`, `QrisHelper`, `PrinterPrefs`, `ImageStorageHelper`, `PortraitCaptureActivity`, `ThemePrefs`, `Util`)
 
 ### Alur Navigasi
 - **Host Activities**:
@@ -59,19 +59,20 @@
 - **Penyimpanan Lokal Lain**:
   - `SessionManager`: Mengelola kredensial/role pengguna.
   - `PrinterPrefs`: SharedPreferences preferensi printer & alamat MAC Bluetooth.
+  - `ThemePrefs`: SharedPreferences mode tema (`system`, `light`, `dark`).
 
 ---
 
 ## 4. Konvensi UI/UX Saat Ini
-- **File Tema & Base Style**: `res/values/themes.xml` (`Theme.AJOPOS` berbasis `Theme.MaterialComponents.DayNight.NoActionBar`).
-- **Skema Warna Identity** (`res/values/colors.xml` - Cyan & Ocean Blue):
-  - Primary: `#0369A1` (`primary`), Secondary/Variant: `#45B1BA` (`primary2`)
-  - Accent/Highlight: `#E0F2FE` (`highlight`), `#BAE6FD` (`light`)
-  - Background: `#F4F9FB`, Surface: `#FFFFFF`, Surface Tint: `#F0F9FF`
-  - Text: `#0C2538` (`on_surface`), `#526E7E` (`text_secondary`)
+- **File Tema & Base Style**: `res/values/themes.xml` & `res/values-night/themes.xml` (`Theme.AJOPOS` berbasis `Theme.MaterialComponents.DayNight.NoActionBar`).
+- **Skema Warna Identity** (`res/values/colors.xml` & `res/values-night/colors.xml` - Midnight Dongker Navy):
+  - Header & Primary Dark: `#070D1D` (`header_bg`, `primary` Light Mode)
+  - Surface Dark Mode: `#0E1A34` (`surface` Dark Mode)
+  - Accent Container: `#182B50` (`highlight` Dark Mode)
+  - Text Colors: `#F8FAFC` (`on_surface` Dark Mode), `#070D1D` (`on_surface` Light Mode), `#94A3B8` (`text_secondary` Dark Mode)
 - **Layout & Layout Responsif**:
-  - Penggunaan Material Cards (`cornerRadius="12dp"` / `Widget.Petung.Button`).
-  - Layout khusus tablet/layar lebar tersedia di `res/layout-sw600dp/fragment_home.xml`.
+  - Floating Checkout Bar + BottomSheet Cart di ponsel ([fragment_home.xml](file:///D:/JOB/AJOCLUB/POS/android/app/src/main/res/layout/fragment_home.xml)).
+  - Layout khusus tablet/layar lebar (2-Pane Split Screen) di [fragment_home.xml (sw600dp)](file:///D:/JOB/AJOCLUB/POS/android/app/src/main/res/layout-sw600dp/fragment_home.xml).
 
 ---
 
@@ -80,3 +81,4 @@
 2. **Menjaga Kompatibilitas**: Dilarang merusak versi Gradle, `minSdk` (24), `targetSdk` (35), JVM 1.8, atau dependensi library lama.
 3. **Kompatibilitas ViewBinding/DataBinding**: Setiap perombakan UI/UX pada XML wajib mempertahankan ID view dan binding class yang terhubung di Fragment/Activity/Adapter.
 4. **Format Respon**: Respon dalam obrolan wajib singkat, padat, dan langsung pada inti solusi.
+5. **Aturan Strict Version Control (Git)**: **DILARANG** melakukan commit, push, pull, atau perubahan pada repository Git secara otomatis tanpa konfirmasi dan persetujuan eksplisit dari pengguna terlebih dahulu.
