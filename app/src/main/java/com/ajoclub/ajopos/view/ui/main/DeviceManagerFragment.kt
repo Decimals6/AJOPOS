@@ -201,26 +201,26 @@ class DeviceManagerFragment : Fragment() {
     private fun loadPairedDevicesToList() {
         val adapter = BluetoothAdapter.getDefaultAdapter() ?: run {
             binding.listPairedDevices.adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listOf("Bluetooth tidak tersedia"))
+                ArrayAdapter(requireContext(), com.ajoclub.ajopos.R.layout.item_bluetooth_device, com.ajoclub.ajopos.R.id.tvDeviceName, listOf("Bluetooth tidak tersedia"))
             return
         }
 
         if (!adapter.isEnabled) {
             binding.listPairedDevices.adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listOf("Nyalakan Bluetooth untuk melihat perangkat"))
+                ArrayAdapter(requireContext(), com.ajoclub.ajopos.R.layout.item_bluetooth_device, com.ajoclub.ajopos.R.id.tvDeviceName, listOf("Nyalakan Bluetooth untuk melihat perangkat"))
             return
         }
 
         val paired = adapter.bondedDevices
         if (paired.isEmpty()) {
             binding.listPairedDevices.adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listOf("Tidak ada perangkat terpasang"))
+                ArrayAdapter(requireContext(), com.ajoclub.ajopos.R.layout.item_bluetooth_device, com.ajoclub.ajopos.R.id.tvDeviceName, listOf("Tidak ada perangkat terpasang"))
             return
         }
 
         val names = paired.map { "${it.name} (${it.address})" }
         binding.listPairedDevices.adapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, names)
+            ArrayAdapter(requireContext(), com.ajoclub.ajopos.R.layout.item_bluetooth_device, com.ajoclub.ajopos.R.id.tvDeviceName, names)
     }
 
     private fun checkBtPermissions(): Boolean {

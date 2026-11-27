@@ -1,197 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/background"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:spacing="12dp">
+        android:padding="16dp">
 
-        <!-- STATUS BLUETOOTH -->
-        <androidx.cardview.widget.CardView
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kelola Perangkat Bluetooth"
+            android:textColor="@color/on_surface"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="14dp"
-            card_view:cardElevation="4dp"
-            android:padding="16dp">
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="16dp"
+            android:text="Hubungkan printer thermal Bluetooth untuk mencetak nota transaksi."
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <!-- STATUS BLUETOOTH -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="18dp">
 
                 <TextView
                     android:id="@+id/tvStatusBluetooth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_version_badge"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
                     android:text="Status Bluetooth: -"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
-                <Button
+                    android:textColor="@color/on_surface"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToggleBluetooth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Aktifkan Bluetooth" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- DAFTAR DEVICE TERPASANG -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="14dp"
-            card_view:cardElevation="4dp"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Perangkat Bluetooth Terpasangan"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
-
-                <ListView
-                    android:id="@+id/listPairedDevices"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:dividerHeight="1dp" />
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/header_bg"
+                    android:text="Aktifkan Bluetooth"
+                    android:textAllCaps="false"
+                    android:textColor="@color/header_on"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp" />
 
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- PRINTER CUSTOMER -->
-        <androidx.cardview.widget.CardView
+        <!-- PRINTER CUSTOMER (UTAMA) -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="14dp"
-            card_view:cardElevation="4dp"
-            android:padding="16dp">
+            android:layout_marginBottom="14dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="18dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Printer Customer"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:text="Printer Kasir (Utama)"
+                    android:textColor="@color/on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPrinterCustomer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tersimpan: -"
-                    android:layout_marginTop="6dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="14dp"
+                    android:text="Belum dipilih"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <!-- Action Buttons for Printer Customer -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUbahPrinterCustomer"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/header_bg"
+                    android:text="Pilih / Hubungkan Printer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/header_on"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btnUbahPrinterCustomer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ubah" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTestPrintCustomer"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:text="Test Print"
+                        android:textAllCaps="false"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/outline" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnHapusPrinterCustomer"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="8dp"
                         android:text="Hapus"
-                        android:layout_marginStart="10dp" />
+                        android:textAllCaps="false"
+                        android:textColor="@color/error"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnTestPrintCustomer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Test Print Customer"
-                    android:layout_marginTop="12dp" />
-
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- PRINTER KITCHEN -->
-        <androidx.cardview.widget.CardView
+        <!-- PRINTER KITCHEN (DAPUR) -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="14dp"
-            card_view:cardElevation="4dp"
-            android:padding="16dp">
+            android:layout_marginBottom="14dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="18dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Printer Kitchen"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:text="Printer Dapur (Kitchen)"
+                    android:textColor="@color/on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPrinterKitchen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tersimpan: -"
-                    android:layout_marginTop="6dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="14dp"
+                    android:text="Belum dipilih"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <!-- Action Buttons for Printer Kitchen -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUbahPrinterKitchen"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/header_bg"
+                    android:text="Pilih / Hubungkan Printer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/header_on"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btnUbahPrinterKitchen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ubah" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTestPrintKitchen"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:text="Test Print"
+                        android:textAllCaps="false"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/outline" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnHapusPrinterKitchen"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="8dp"
                         android:text="Hapus"
-                        android:layout_marginStart="10dp" />
+                        android:textAllCaps="false"
+                        android:textColor="@color/error"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnTestPrintKitchen"
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- DAFTAR DEVICE TERPASANG -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Test Print Kitchen"
-                    android:layout_marginTop="12dp" />
+                    android:text="Perangkat Bluetooth Terpasang"
+                    android:textColor="@color/on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="Sentuh perangkat untuk menentukan role printer cepat."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <ListView
+                    android:id="@+id/listPairedDevices"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:divider="@color/outline"
+                    android:dividerHeight="1dp"
+                    android:nestedScrollingEnabled="true"
+                    tools:listitem="@layout/item_bluetooth_device" />
 
             </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
